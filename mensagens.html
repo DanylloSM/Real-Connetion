@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RealConnection | Mensagens</title>
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="mensagens.css">
+</head>
+<body>
+
+  <main class="app">
+
+    <!-- MENU LATERAL -->
+    <aside class="menu-lateral" id="menuLateral">
+      <div class="perfil-usuario">
+        <img src="perfil.jpg" alt="Foto do usuário" class="avatar">
+        <p class="nome">Vitor</p>
+      </div>
+
+      <button id="abrir-menu">⏪</button>
+
+      <nav>
+        <a href="lobby.html">🔍 Explorar</a>
+        <a href="matches.html">💜 Matches</a>
+        <a href="mensagens.html" class="ativo">💬 Mensagens</a>
+        <a href="editperfil.html">⚙️ Editar perfil</a>
+      </nav>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL DE MENSAGENS -->
+    <section class="conteudo mensagens">
+
+      <!-- LISTA DE CONVERSAS -->
+      <div class="card lista-conversas">
+        <h2>Mensagens</h2>
+
+        <div class="conversa-item ativo" data-chat="julia">
+          <img src="julia.jpg" alt="Julia" class="avatar">
+          <div class="info-contato">
+            <strong>Julia</strong>
+            <p>Você: Que tal um café amanhã?</p>
+          </div>
+          <span class="hora">10:45</span>
+        </div>
+
+        <div class="conversa-item" data-chat="ana">
+          <img src="ana.jpg" alt="Ana" class="avatar">
+          <div class="info-contato">
+            <strong>Ana</strong>
+            <p>Ana: Adorei seu perfil 💜</p>
+          </div>
+          <span class="hora">Ontem</span>
+        </div>
+
+        <div class="conversa-item" data-chat="marcos">
+          <img src="marcos.jpg" alt="Marcos" class="avatar">
+          <div class="info-contato">
+            <strong>Marcos</strong>
+            <p>Marcos: Vamos conversar?</p>
+          </div>
+          <span class="hora">Seg</span>
+        </div>
+      </div>
+
+      <!-- CHAT ATIVO -->
+      <div class="card chat-ativo">
+        <div class="cabecalho-chat">
+          <img src="marcos.jpg" alt="Marcos" class="avatar">
+          <div>
+            <h3 id="chat-nome">Marcos</h3>
+            <span id="chat-status">Online</span>
+          </div>
+        </div>
+
+        <div class="mensagens-chat" id="chat-conteudo">
+          <div class="mensagem recebida">E aí, cara! Curte viagens?</div>
+          <div class="mensagem enviada">Demais! Já fui pra 5 países.</div>
+        </div>
+
+        <form class="input-chat" id="form-chat">
+          <input type="text" placeholder="Digite uma mensagem..." required>
+          <button type="submit" class="btn-primary">Enviar</button>
+        </form>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    // Alternar menu lateral
+    const btnToggle = document.getElementById("abrir-menu");
+    const menuLateral = document.getElementById("menuLateral");
+
+    btnToggle.addEventListener("click", () => {
+      menuLateral.classList.toggle("fechado");
+      btnToggle.textContent = menuLateral.classList.contains("fechado") ? "⏩" : "⏪";
+    });
+
+    // Simulação de chats diferentes
+    const chats = {
+      julia: [
+        { tipo: 'recebida', texto: 'Oi, Vitor! Tudo bem?' },
+        { tipo: 'enviada', texto: 'Tudo ótimo! E você?' },
+        { tipo: 'recebida', texto: 'Melhor agora 😄' }
+      ],
+      ana: [
+        { tipo: 'recebida', texto: 'Oi, Vitor! Vi que gostamos de café ☕' },
+        { tipo: 'enviada', texto: 'Sim! É meu vício favorito 😅' }
+      ],
+      marcos: [
+        { tipo: 'recebida', texto: 'E aí, cara! Curte viagens?' },
+        { tipo: 'enviada', texto: 'Demais! Já fui pra 5 países.' }
+      ]
+    };
+
+    const conversaItems = document.querySelectorAll('.conversa-item');
+    const chatConteudo = document.getElementById('chat-conteudo');
+    const chatNome = document.getElementById('chat-nome');
+
+    conversaItems.forEach(item => {
+      item.addEventListener('click', () => {
+        conversaItems.forEach(i => i.classList.remove('ativo'));
+        item.classList.add('ativo');
+
+        const chatId = item.dataset.chat;
+        chatNome.textContent = chatId.charAt(0).toUpperCase() + chatId.slice(1);
+        chatConteudo.innerHTML = '';
+
+        chats[chatId].forEach(msg => {
+          const div = document.createElement('div');
+          div.classList.add('mensagem', msg.tipo);
+          div.textContent = msg.texto;
+          chatConteudo.appendChild(div);
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

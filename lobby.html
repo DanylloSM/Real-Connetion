@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RealConnection | Match</title>
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="top">
+      <button id="toggle" type="button" aria-label="Abrir ou fechar menu">☰</button>
+    </div>
+
+    <a href="perfil.html" class="profile">
+      <div class="avatar"></div>
+      <span class="name">Vitor</span>
+    </a>
+
+    <nav>
+      <a href="lobby.html"><span>🏠</span><p>Explorar</p></a>
+      <a href="matches.html"><span>❤️</span><p>Matches</p></a>
+      <a href="mensagens.html"><span>💬</span><p>Mensagens</p></a>
+      <a href="editperfil.html"><span>⚙️</span><p>Editar perfil</p></a>
+    </nav>
+
+  </aside>
+
+  <!-- CONTEÚDO -->
+  <main class="content">
+
+    <!-- INFO (ESQUERDA) -->
+    <section class="info">
+
+      <h2>Sobre</h2>
+      <p class="bio">
+        "Sou movida por propósito, conexão verdadeira e boas conversas."
+      </p>
+
+      <div class="grid-info">
+
+        <div><strong>Idade</strong><span>24</span></div>
+        <div><strong>Sexualidade</strong><span>Heterossexual</span></div>
+
+        <div><strong>Estado civil</strong><span>Solteira</span></div>
+        <div><strong>Cigarros</strong><span>Não</span></div>
+
+        <div><strong>Filhos</strong><span>Não</span></div>
+        <div><strong>Álcool</strong><span>Socialmente</span></div>
+
+        <div><strong>Altura</strong><span>1,64m</span></div>
+        <div><strong>Pets</strong><span>Cachorro</span></div>
+
+        <div><strong>Signo</strong><span>Libra</span></div>
+        <div><strong>Personalidade</strong><span>Empática</span></div>
+
+        <div><strong>Religião</strong><span>Cristã</span></div>
+        <div><strong>Educação</strong><span>Psicologia</span></div>
+
+      </div>
+
+      <h3>Interesses</h3>
+      <div class="tags">
+        <span>Livros</span>
+        <span>Café</span>
+        <span>Psicologia</span>
+        <span>Viagens</span>
+      </div>
+
+    </section>
+
+    <!-- PERFIL (DIREITA) -->
+    <section class="perfil">
+
+  <!-- FOTO -->
+  <div class="foto">
+
+    <!-- COMPATIBILIDADE -->
+    <div class="compatibilidade">
+      <strong>86%</strong>
+      <span>Compatibilidade</span>
+    </div>
+
+  </div>
+
+  <!-- INFO -->
+  <div class="perfil-info">
+    <h2>Julia, 24</h2>
+    <p>São Paulo, SP</p>
+  </div>
+
+  <!-- BOTÕES -->
+  <div class="actions">
+    <button>⟲</button>
+    <button class="no">✖</button>
+    <button class="fav">★</button>
+    <button class="like">❤</button>
+  </div>
+
+  <!-- AFINIDADE -->
+  <div class="afinidade">
+    <p>👥 Vocês têm <strong><span id="interesses-comuns">0</span> interesses em comum</strong></p>
+    <p id="lista-interesses"></p>
+  </div>
+</section>
+
+  </main>
+
+</div>
+
+<script>
+    const interesses = ["livros", "café", "fé"];
+    const interessesOutro = ["livros", "viagens", "fé"];
+
+    const comuns = interesses.filter(interesse =>
+        interessesOutro.includes(interesse)
+    );
+
+    const totalInteresses = document.getElementById("interesses-comuns");
+    const listaInteresses = document.getElementById("lista-interesses");
+
+    totalInteresses.textContent = comuns.length;
+    listaInteresses.textContent =
+        "Interesses em comum: " + comuns.join(", ");
+
+    const toggle = document.getElementById("toggle");
+    const sidebar = document.getElementById("sidebar");
+
+    toggle.addEventListener("click", () => {
+        sidebar.classList.toggle("collapsed");
+    });
+</script>
+</body>
+</html>
