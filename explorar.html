@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RealConnection | Explorar</title>
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+      <div class="top">
+        <button id="toggle" type="button" aria-label="Abrir ou fechar menu">☰</button>
+      </div>
+
+      <a href="perfil.html" class="profile">
+        <div class="avatar"></div>
+        <span class="name">Vitor</span>
+      </a>
+
+      <nav>
+        <a href="explorar.html" class="ativo"><span>🔍</span><p>Explorar</p></a>
+        <a href="lobby.html"><span>❤️</span><p>Matches</p></a>
+        <a href="mensagens.html"><span>💬</span><p>Mensagens</p></a>
+        <a href="perfil.html"><span>👤</span><p>Meu perfil</p></a>
+        <a href="editperfil.html"><span>⚙️</span><p>Editar perfil</p></a>
+      </nav>
+
+    </aside>
+
+    <!-- CONTEÚDO -->
+    <main class="explorar-page">
+
+      <section class="explorar-hero">
+        <div>
+          <span class="explorar-label">Descubra novas conexões</span>
+          <h1>Explore pessoas com valores parecidos com os seus</h1>
+          <p>
+            Encontre perfis por afinidade, interesses, estilo de vida e objetivos.
+            Aqui a busca não começa só pela aparência, mas pelo que realmente combina.
+          </p>
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <script>
+    const toggle = document.getElementById("toggle");
+    const sidebar = document.getElementById("sidebar");
+
+    toggle.addEventListener("click", () => {
+      sidebar.classList.toggle("collapsed");
+    });
+  </script>
+
+</body>
+</html>
