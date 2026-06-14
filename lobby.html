@@ -3,142 +3,297 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RealConnection | Matches</title>
+  <title>RealConnection | Perfil</title>
+
   <link rel="stylesheet" href="global.css">
   <link rel="stylesheet" href="app.css">
 </head>
 <body>
 
-<div class="app">
+  <div class="app">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar">
+    <!-- MENU LATERAL -->
+    <aside class="sidebar" id="sidebar">
 
-    <div class="top">
-      <button id="toggle" type="button" aria-label="Abrir ou fechar menu">☰</button>
-    </div>
-
-    <a href="perfil.html" class="profile">
-      <div class="avatar"></div>
-      <span class="name">Vitor</span>
-    </a>
-
-    <nav>
-      <a href="explorar.html"><span>🔍</span><p>Explorar</p></a>
-      <a href="lobby.html" class="ativo"><span>❤️</span><p>Matches</p></a>
-      <a href="mensagens.html"><span>💬</span><p>Mensagens</p></a>
-      <a href="perfil.html"><span>👤</span><p>Meu perfil</p></a>
-      <a href="editperfil.html"><span>⚙️</span><p>Editar perfil</p></a>
-    </nav>
-
-  </aside>
-
-  <!-- CONTEÚDO -->
-  <main class="content">
-
-    <!-- INFO (ESQUERDA) -->
-    <section class="info">
-
-      <h2>Sobre</h2>
-      <p class="bio">
-        "Sou movida por propósito, conexão verdadeira e boas conversas."
-      </p>
-
-      <div class="grid-info">
-
-        <div><strong>Idade</strong><span>24</span></div>
-        <div><strong>Sexualidade</strong><span>Heterossexual</span></div>
-
-        <div><strong>Estado civil</strong><span>Solteira</span></div>
-        <div><strong>Cigarros</strong><span>Não</span></div>
-
-        <div><strong>Filhos</strong><span>Não</span></div>
-        <div><strong>Álcool</strong><span>Socialmente</span></div>
-
-        <div><strong>Altura</strong><span>1,64m</span></div>
-        <div><strong>Pets</strong><span>Cachorro</span></div>
-
-        <div><strong>Signo</strong><span>Libra</span></div>
-        <div><strong>Personalidade</strong><span>Empática</span></div>
-
-        <div><strong>Religião</strong><span>Cristã</span></div>
-        <div><strong>Educação</strong><span>Psicologia</span></div>
-
+      <div class="top">
+        <button id="toggle" type="button" aria-label="Abrir ou fechar menu">☰</button>
       </div>
 
-      <h3>Interesses</h3>
-      <div class="tags">
-        <span>Livros</span>
-        <span>Café</span>
-        <span>Psicologia</span>
-        <span>Viagens</span>
-      </div>
+      <a href="perfil.html" class="profile">
+        <div class="avatar"></div>
+        <span class="name">Vitor</span>
+      </a>
 
-    </section>
+      <nav>
+        <a href="explorar.html"><span>🔍</span><p>Explorar</p></a>
+        <a href="matches.html"><span>❤️</span><p>Matches</p></a>
+        <a href="mensagens.html"><span>💬</span><p>Mensagens</p></a>
+        <a href="perfil.html"><span>👤</span><p>Meu perfil</p></a>
+        <a href="editperfil.html"><span>⚙️</span><p>Editar perfil</p></a>
+      </nav>
 
-    <!-- PERFIL (DIREITA) -->
-    <section class="perfil">
+    </aside>
 
-  <!-- FOTO -->
-  <div class="foto">
+    <!-- CONTEÚDO -->
+    <main class="content">
 
-<img src="julia.jpg" alt="Foto de Julia" class="foto-perfil-lobby">
+      <!-- INFO DO PERFIL -->
+      <section class="info">
 
+        <h2>Sobre</h2>
 
-    <!-- COMPATIBILIDADE -->
-    <div class="compatibilidade">
-      <strong>86%</strong>
-      <span>Compatibilidade</span>
-    </div>
+        <p class="bio" id="bioPessoa"></p>
+
+        <div class="grid-info">
+
+          <div>
+            <strong>Idade</strong>
+            <span id="idadePessoa"></span>
+          </div>
+
+          <div>
+            <strong>Sexualidade</strong>
+            <span id="sexualidadePessoa"></span>
+          </div>
+
+          <div>
+            <strong>Estado civil</strong>
+            <span id="estadoCivilPessoa"></span>
+          </div>
+
+          <div>
+            <strong>Cigarros</strong>
+            <span id="cigarrosPessoa"></span>
+          </div>
+
+          <div>
+            <strong>Filhos</strong>
+            <span id="filhosPessoa"></span>
+          </div>
+
+          <div>
+            <strong>Álcool</strong>
+            <span id="alcoolPessoa"></span>
+          </div>
+
+          <div>
+            <strong>Altura</strong>
+            <span id="alturaPessoa"></span>
+          </div>
+
+          <div>
+            <strong>Pets</strong>
+            <span id="petsPessoa"></span>
+          </div>
+
+          <div>
+            <strong>Signo</strong>
+            <span id="signoPessoa"></span>
+          </div>
+
+          <div>
+            <strong>Personalidade</strong>
+            <span id="personalidadePessoa"></span>
+          </div>
+
+          <div>
+            <strong>Religião</strong>
+            <span id="religiaoPessoa"></span>
+          </div>
+
+          <div>
+            <strong>Educação</strong>
+            <span id="educacaoPessoa"></span>
+          </div>
+
+        </div>
+
+        <h3>Interesses</h3>
+        <div class="tags" id="tagsPessoa"></div>
+
+      </section>
+
+      <!-- CARD PRINCIPAL -->
+      <section class="perfil">
+
+        <div class="foto">
+          <img id="fotoPessoa" src="" alt="" class="foto-perfil-lobby">
+
+          <div class="compatibilidade">
+            <strong id="compatibilidadePessoa"></strong>
+            <span>Compatibilidade</span>
+          </div>
+        </div>
+
+        <div class="perfil-info">
+          <h2 id="nomePessoa"></h2>
+          <p id="cidadePessoa"></p>
+        </div>
+
+        <div class="actions">
+          <button type="button">⟲</button>
+          <button type="button" class="no">✖</button>
+          <button type="button" class="fav">★</button>
+          <button type="button" class="like">❤</button>
+        </div>
+
+        <div class="afinidade">
+          <p>
+            👥 Vocês têm
+            <strong><span id="interessesComunsTotal">0</span> interesses em comum</strong>
+          </p>
+
+          <p id="listaInteressesComuns"></p>
+        </div>
+
+      </section>
+
+    </main>
 
   </div>
 
-  <!-- INFO -->
-  <div class="perfil-info">
-    <h2>Julia, 24</h2>
-    <p>São Paulo, SP</p>
-  </div>
+  <script>
+    const pessoas = {
+      julia: {
+        nome: "Julia",
+        idade: "24",
+        cidade: "São Paulo, SP",
+        foto: "julia.jpg",
+        compatibilidade: "86%",
+        bio: "Sou movida por propósito, conexão verdadeira e boas conversas.",
+        sexualidade: "Heterossexual",
+        estadoCivil: "Solteira",
+        cigarros: "Não",
+        filhos: "Não",
+        alcool: "Socialmente",
+        altura: "1,64m",
+        pets: "Cachorro",
+        signo: "Libra",
+        personalidade: "Empática",
+        religiao: "Cristã",
+        educacao: "Psicologia",
+        interesses: ["Livros", "Café", "Fé", "Viagens"]
+      },
 
-  <!-- BOTÕES -->
-  <div class="actions">
-    <button>⟲</button>
-    <button class="no">✖</button>
-    <button class="fav">★</button>
-    <button class="like">❤</button>
-  </div>
+      amanda: {
+        nome: "Amanda",
+        idade: "22",
+        cidade: "Rio de Janeiro, RJ",
+        foto: "amanda.jpg",
+        compatibilidade: "78%",
+        bio: "Gosto de música, viagens e conversas leves. Valorizo respeito, bom humor e sinceridade.",
+        sexualidade: "Heterossexual",
+        estadoCivil: "Solteira",
+        cigarros: "Não",
+        filhos: "Não",
+        alcool: "Socialmente",
+        altura: "1,68m",
+        pets: "Gato",
+        signo: "Áries",
+        personalidade: "Comunicativa",
+        religiao: "Cristã",
+        educacao: "Publicidade",
+        interesses: ["Música", "Viagens", "Respeito", "Café"]
+      },
 
-  <!-- AFINIDADE -->
-  <div class="afinidade">
-    <p>👥 Vocês têm <strong><span id="interesses-comuns">0</span> interesses em comum</strong></p>
-    <p id="lista-interesses"></p>
-  </div>
-</section>
+      larissa: {
+        nome: "Larissa",
+        idade: "20",
+        cidade: "Niterói, RJ",
+        foto: "larissa.jpg",
+        compatibilidade: "74%",
+        bio: "Curto arte, filmes e tecnologia. Procuro conexões sinceras, leves e criativas.",
+        sexualidade: "Heterossexual",
+        estadoCivil: "Solteira",
+        cigarros: "Não",
+        filhos: "Não",
+        alcool: "Não",
+        altura: "1,62m",
+        pets: "Gato",
+        signo: "Aquário",
+        personalidade: "Criativa",
+        religiao: "Prefiro não informar",
+        educacao: "Design",
+        interesses: ["Arte", "Filmes", "Tecnologia", "Livros"]
+      },
 
-  </main>
+      marina: {
+        nome: "Marina",
+        idade: "23",
+        cidade: "Duque de Caxias, RJ",
+        foto: "marina.jpg",
+        compatibilidade: "71%",
+        bio: "Gosto de academia, pets e rotina equilibrada. Valorizo família, estabilidade e diálogo.",
+        sexualidade: "Heterossexual",
+        estadoCivil: "Solteira",
+        cigarros: "Não",
+        filhos: "Não",
+        alcool: "Socialmente",
+        altura: "1,70m",
+        pets: "Cachorro",
+        signo: "Touro",
+        personalidade: "Responsável",
+        religiao: "Cristã",
+        educacao: "Administração",
+        interesses: ["Academia", "Pets", "Família", "Estabilidade"]
+      }
+    };
 
-</div>
+    const meusInteresses = ["Livros", "Café", "Fé", "Tecnologia", "Família"];
 
-<script>
-    const interesses = ["livros", "café", "fé"];
-    const interessesOutro = ["livros", "viagens", "fé"];
+    const parametros = new URLSearchParams(window.location.search);
+    const pessoaSelecionada = parametros.get("pessoa") || "julia";
+    const pessoa = pessoas[pessoaSelecionada] || pessoas.julia;
 
-    const comuns = interesses.filter(interesse =>
-        interessesOutro.includes(interesse)
+    document.title = `RealConnection | ${pessoa.nome}`;
+
+    document.getElementById("nomePessoa").textContent = `${pessoa.nome}, ${pessoa.idade}`;
+    document.getElementById("cidadePessoa").textContent = pessoa.cidade;
+    document.getElementById("fotoPessoa").src = pessoa.foto;
+    document.getElementById("fotoPessoa").alt = `Foto de ${pessoa.nome}`;
+    document.getElementById("compatibilidadePessoa").textContent = pessoa.compatibilidade;
+    document.getElementById("bioPessoa").textContent = `"${pessoa.bio}"`;
+
+    document.getElementById("idadePessoa").textContent = pessoa.idade;
+    document.getElementById("sexualidadePessoa").textContent = pessoa.sexualidade;
+    document.getElementById("estadoCivilPessoa").textContent = pessoa.estadoCivil;
+    document.getElementById("cigarrosPessoa").textContent = pessoa.cigarros;
+    document.getElementById("filhosPessoa").textContent = pessoa.filhos;
+    document.getElementById("alcoolPessoa").textContent = pessoa.alcool;
+    document.getElementById("alturaPessoa").textContent = pessoa.altura;
+    document.getElementById("petsPessoa").textContent = pessoa.pets;
+    document.getElementById("signoPessoa").textContent = pessoa.signo;
+    document.getElementById("personalidadePessoa").textContent = pessoa.personalidade;
+    document.getElementById("religiaoPessoa").textContent = pessoa.religiao;
+    document.getElementById("educacaoPessoa").textContent = pessoa.educacao;
+
+    const tagsPessoa = document.getElementById("tagsPessoa");
+    tagsPessoa.innerHTML = "";
+
+    pessoa.interesses.forEach(interesse => {
+      const span = document.createElement("span");
+      span.textContent = interesse;
+      tagsPessoa.appendChild(span);
+    });
+
+    const interessesComuns = pessoa.interesses.filter(interesse =>
+      meusInteresses.includes(interesse)
     );
 
-    const totalInteresses = document.getElementById("interesses-comuns");
-    const listaInteresses = document.getElementById("lista-interesses");
+    document.getElementById("interessesComunsTotal").textContent = interessesComuns.length;
 
-    totalInteresses.textContent = comuns.length;
-    listaInteresses.textContent =
-        "Interesses em comum: " + comuns.join(", ");
+    document.getElementById("listaInteressesComuns").textContent =
+      interessesComuns.length > 0
+        ? "Interesses em comum: " + interessesComuns.join(", ")
+        : "Nenhum interesse em comum encontrado.";
 
     const toggle = document.getElementById("toggle");
     const sidebar = document.getElementById("sidebar");
 
     toggle.addEventListener("click", () => {
-        sidebar.classList.toggle("collapsed");
+      sidebar.classList.toggle("collapsed");
     });
-</script>
+  </script>
+
 </body>
 </html>
