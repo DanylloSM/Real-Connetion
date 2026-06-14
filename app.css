@@ -112,7 +112,7 @@
 }
 
 .sidebar nav a:hover,
-.menu-lateral nav a:hover 
+.menu-lateral nav a:hover,
   .sidebar nav a.ativo,
   .menu-lateral nav a.ativo {
   background: rgba(255,255,255,0.08);
