@@ -58,15 +58,22 @@
       </section>
 
       <section class="filtros-explorar">
-        <button type="button" class="filtro ativo">Mais compatíveis</button>
-        <button type="button" class="filtro">Perto de você</button>
-        <button type="button" class="filtro">Interesses em comum</button>
-        <button type="button" class="filtro">Relacionamento sério</button>
+        <button type="button" class="filtro ativo" data-filtro="todos">Mais compatíveis</button>
+        <button type="button" class="filtro" data-filtro="perto">Perto de você</button>
+        <button type="button" class="filtro" data-filtro="interesses">Interesses em comum</button>
+        <button type="button" class="filtro" data-filtro="serio">Relacionamento sério</button>
       </section>
 
       <section class="cards-explorar" id="listaPessoas">
 
-        <article class="explorar-card" data-busca="julia livros café fé são paulo relacionamento sério">
+        <article
+          class="explorar-card"
+          data-busca="julia livros café fé são paulo relacionamento sério"
+          data-compatibilidade="86"
+          data-local="sp"
+          data-interesses="3"
+          data-objetivo="serio"
+        >
           <div class="foto-card">
             <img src="julia.jpg" alt="Foto de Julia">
             <span class="compatibilidade-card">86%</span>
@@ -96,7 +103,14 @@
           </div>
         </article>
 
-        <article class="explorar-card" data-busca="amanda música viagens rio de janeiro conexão">
+        <article
+          class="explorar-card"
+          data-busca="amanda música viagens rio de janeiro conexão"
+          data-compatibilidade="78"
+          data-local="rj"
+          data-interesses="2"
+          data-objetivo="conexao"
+        >
           <div class="foto-card">
             <img src="amanda.jpg" alt="Foto de Amanda">
             <span class="compatibilidade-card">78%</span>
@@ -124,7 +138,14 @@
           </div>
         </article>
 
-        <article class="explorar-card" data-busca="larissa arte filmes tecnologia niterói">
+        <article
+          class="explorar-card"
+          data-busca="larissa arte filmes tecnologia niterói"
+          data-compatibilidade="74"
+          data-local="rj"
+          data-interesses="1"
+          data-objetivo="conexao"
+        >
           <div class="foto-card">
             <img src="larissa.jpg" alt="Foto de Larissa">
             <span class="compatibilidade-card">74%</span>
@@ -152,7 +173,14 @@
           </div>
         </article>
 
-        <article class="explorar-card" data-busca="marina academia pets estabilidade família">
+        <article
+          class="explorar-card"
+          data-busca="marina academia pets estabilidade família relacionamento sério"
+          data-compatibilidade="71"
+          data-local="rj"
+          data-interesses="2"
+          data-objetivo="serio"
+        >
           <div class="foto-card">
             <img src="marina.jpg" alt="Foto de Marina">
             <span class="compatibilidade-card">71%</span>
@@ -195,21 +223,69 @@
     });
 
     const buscarPessoa = document.getElementById("buscarPessoa");
-    const cards = document.querySelectorAll(".explorar-card");
+    const listaPessoas = document.getElementById("listaPessoas");
+    const cards = Array.from(document.querySelectorAll(".explorar-card"));
+    const filtros = document.querySelectorAll(".filtro");
 
-    buscarPessoa.addEventListener("input", () => {
+    let filtroAtual = "todos";
+
+    function aplicarFiltros() {
       const termo = buscarPessoa.value.toLowerCase().trim();
 
       cards.forEach(card => {
         const texto = card.dataset.busca.toLowerCase();
+        const local = card.dataset.local;
+        const objetivo = card.dataset.objetivo;
 
-        if (texto.includes(termo)) {
+        let aparece = texto.includes(termo);
+
+        if (filtroAtual === "perto") {
+          aparece = aparece && local === "rj";
+        }
+
+        if (filtroAtual === "serio") {
+          aparece = aparece && objetivo === "serio";
+        }
+
+        if (aparece) {
           card.classList.remove("esconder");
         } else {
           card.classList.add("esconder");
         }
       });
+
+      if (filtroAtual === "todos") {
+        ordenarPor("compatibilidade");
+      }
+
+      if (filtroAtual === "interesses") {
+        ordenarPor("interesses");
+      }
+    }
+
+    function ordenarPor(tipo) {
+      const cardsOrdenados = [...cards].sort((a, b) => {
+        return Number(b.dataset[tipo]) - Number(a.dataset[tipo]);
+      });
+
+      cardsOrdenados.forEach(card => {
+        listaPessoas.appendChild(card);
+      });
+    }
+
+    buscarPessoa.addEventListener("input", aplicarFiltros);
+
+    filtros.forEach(botao => {
+      botao.addEventListener("click", () => {
+        filtros.forEach(item => item.classList.remove("ativo"));
+        botao.classList.add("ativo");
+
+        filtroAtual = botao.dataset.filtro;
+        aplicarFiltros();
+      });
     });
+
+    aplicarFiltros();
   </script>
 
 </body>
