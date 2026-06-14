@@ -128,15 +128,55 @@
   </main>
 <script>
   const formCadastro = document.querySelector("form");
+  const nome = document.getElementById("nome");
+  const email = document.getElementById("email");
+  const dataNascimento = document.getElementById("data-nascimento");
+  const cidade = document.getElementById("cidade");
   const senha = document.getElementById("senha");
   const confirmarSenha = document.getElementById("confirmar-senha");
 
+  function calcularIdade(data) {
+    const hoje = new Date();
+    const nascimento = new Date(data);
+
+    let idade = hoje.getFullYear() - nascimento.getFullYear();
+    const mes = hoje.getMonth() - nascimento.getMonth();
+
+    if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+      idade--;
+    }
+
+    return idade;
+  }
+
   formCadastro.addEventListener("submit", (event) => {
+    event.preventDefault();
+
     if (senha.value !== confirmarSenha.value) {
-      event.preventDefault();
       alert("As senhas precisam ser iguais.");
       confirmarSenha.focus();
+      return;
     }
+
+    const idade = calcularIdade(dataNascimento.value);
+
+    if (idade < 18) {
+      alert("O RealConnection é permitido apenas para maiores de 18 anos.");
+      dataNascimento.focus();
+      return;
+    }
+
+    const usuario = {
+      nome: nome.value.trim(),
+      email: email.value.trim(),
+      dataNascimento: dataNascimento.value,
+      idade: idade,
+      cidade: cidade.value.trim()
+    };
+
+    localStorage.setItem("usuarioRealConnection", JSON.stringify(usuario));
+
+    window.location.href = "editperfil.html";
   });
 </script>
 </body>
