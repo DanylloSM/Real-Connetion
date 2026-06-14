@@ -11,124 +11,110 @@
 </head>
 <body>
 
-  <div class="app">
+  <main class="app">
 
     <!-- MENU LATERAL -->
-    <aside class="sidebar" id="sidebar">
+    <aside class="menu-lateral" id="menuLateral">
 
-      <div class="top">
-        <button id="toggle" type="button" aria-label="Abrir ou fechar menu">☰</button>
+      <div class="perfil-usuario">
+        <div class="avatar"></div>
+        <p class="nome">Vitor</p>
       </div>
 
-      <a href="perfil.html" class="profile">
-        <div class="avatar"></div>
-        <span class="name">Vitor</span>
-      </a>
+      <button id="abrir-menu" type="button" aria-label="Abrir ou fechar menu">⏪</button>
 
       <nav>
-        <a href="explorar.html"><span>🔍</span><p>Explorar</p></a>
-        <a href="lobby.html"><span>❤️</span><p>Matches</p></a>
-        <a href="mensagens.html" class="ativo"><span>💬</span><p>Mensagens</p></a>
-        <a href="perfil.html"><span>👤</span><p>Meu perfil</p></a>
-        <a href="editperfil.html"><span>⚙️</span><p>Editar perfil</p></a>
+        <a href="explorar.html">🔍 Explorar</a>
+        <a href="matches.html">❤️ Matches</a>
+        <a href="mensagens.html" class="ativo">💬 Mensagens</a>
+        <a href="perfil.html">👤 Meu perfil</a>
+        <a href="editperfil.html">⚙️ Editar perfil</a>
       </nav>
 
     </aside>
 
-    <!-- PÁGINA DE MENSAGENS -->
-    <main class="mensagens-page">
+    <!-- ÁREA PRINCIPAL DE MENSAGENS -->
+    <section class="conteudo mensagens">
 
-      <section class="mensagens-layout">
+      <!-- LISTA DE CONVERSAS -->
+      <div class="card lista-conversas">
 
-        <!-- LISTA DE CONVERSAS -->
-        <aside class="conversas-card">
+        <h2>Mensagens</h2>
 
-          <div class="mensagens-topo">
-            <span class="mensagens-label">Conversas</span>
-            <h1>Mensagens</h1>
-            <p>Continue conversas com pessoas que combinaram com você.</p>
+        <div class="conversa-item ativo" data-chat="julia">
+          <img src="julia.jpg" alt="Julia" class="avatar">
+
+          <div class="info-contato">
+            <strong>Julia</strong>
+            <p>Julia: Melhor agora 😄</p>
           </div>
 
-          <div class="lista-conversas">
+          <span class="hora">10:45</span>
+        </div>
 
-            <button class="conversa-item ativo" type="button" data-chat="julia">
-              <img src="julia.jpg" alt="Foto de Julia" class="conversa-foto">
+        <div class="conversa-item" data-chat="amanda">
+          <img src="amanda.jpg" alt="Amanda" class="avatar">
 
-              <div class="conversa-texto">
-                <strong>Julia</strong>
-                <p>Você: Que tal um café amanhã?</p>
-              </div>
-
-              <span class="hora">10:45</span>
-            </button>
-
-            <button class="conversa-item" type="button" data-chat="ana">
-              <div class="conversa-inicial">A</div>
-
-              <div class="conversa-texto">
-                <strong>Ana</strong>
-                <p>Ana: Adorei seu perfil 💜</p>
-              </div>
-
-              <span class="hora">Ontem</span>
-            </button>
-
-            <button class="conversa-item" type="button" data-chat="marina">
-              <div class="conversa-inicial">M</div>
-
-              <div class="conversa-texto">
-                <strong>Marina</strong>
-                <p>Marina: Vamos conversar?</p>
-              </div>
-
-              <span class="hora">Seg</span>
-            </button>
-
+          <div class="info-contato">
+            <strong>Amanda</strong>
+            <p>Amanda: Vi que também gosta de música.</p>
           </div>
 
-        </aside>
+          <span class="hora">Ontem</span>
+        </div>
 
-        <!-- CHAT ATIVO -->
-        <section class="chat-card">
+        <div class="conversa-item" data-chat="marina">
+          <img src="marina.jpg" alt="Marina" class="avatar">
 
-          <header class="cabecalho-chat">
-
-            <div class="chat-pessoa">
-              <div class="chat-avatar" id="chat-avatar">
-                <img src="julia.jpg" alt="Foto de Julia">
-              </div>
-
-              <div>
-                <h2 id="chat-nome">Julia</h2>
-                <span id="chat-status">Online agora</span>
-              </div>
-            </div>
-
-            <a href="lobby.html" class="btn-secondary">Ver match</a>
-
-          </header>
-
-          <div class="sugestao-chat">
-            <span>✨ Sugestão de conversa:</span>
-            <p>Vocês dois gostam de livros e fé. Que tal perguntar sobre um livro marcante?</p>
+          <div class="info-contato">
+            <strong>Marina</strong>
+            <p>Marina: Também valorizo família.</p>
           </div>
 
-          <div class="mensagens-chat" id="chat-conteudo">
-            <div class="mensagem recebida">Oi, Vitor! Tudo bem?</div>
-            <div class="mensagem enviada">Tudo ótimo! E você?</div>
-            <div class="mensagem recebida">Melhor agora 😄</div>
+          <span class="hora">Seg</span>
+        </div>
+
+        <div class="conversa-item" data-chat="larissa">
+          <img src="larissa.jpg" alt="Larissa" class="avatar">
+
+          <div class="info-contato">
+            <strong>Larissa</strong>
+            <p>Larissa: Você gosta de tecnologia?</p>
           </div>
 
-          <form class="input-chat" id="form-chat">
-            <input id="mensagem-input" type="text" placeholder="Digite uma mensagem..." required>
-            <button type="submit">Enviar</button>
-          </form>
+          <span class="hora">Sex</span>
+        </div>
 
-        </section>
+      </div>
 
-      </section>
+      <!-- CHAT ATIVO -->
+      <div class="card chat-ativo">
 
-    </main>
+        <div class="cabecalho-chat">
+          <img src="julia.jpg" alt="Julia" class="avatar">
+
+          <div>
+            <h3 id="chat-nome">Julia</h3>
+            <span id="chat-status">Online</span>
+          </div>
+        </div>
+
+        <div class="mensagens-chat" id="chat-conteudo">
+          <div class="mensagem recebida">Oi, Vitor! Tudo bem?</div>
+          <div class="mensagem enviada">Tudo ótimo! E você?</div>
+          <div class="mensagem recebida">Melhor agora 😄</div>
+        </div>
+
+        <form class="input-chat" id="form-chat">
+          <input type="text" placeholder="Digite uma mensagem..." required>
+          <button type="submit" class="btn-primary">Enviar</button>
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
 
   </div>
 
