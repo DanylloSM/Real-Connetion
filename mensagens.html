@@ -132,113 +132,124 @@
 
   </div>
 
-  <script>
-    const toggle = document.getElementById("toggle");
-    const sidebar = document.getElementById("sidebar");
+<script>
+  const btnToggle = document.getElementById("abrir-menu");
+  const menuLateral = document.getElementById("menuLateral");
 
-    toggle.addEventListener("click", () => {
-      sidebar.classList.toggle("collapsed");
-    });
+  btnToggle.addEventListener("click", () => {
+    menuLateral.classList.toggle("fechado");
+    btnToggle.textContent = menuLateral.classList.contains("fechado") ? "⏩" : "⏪";
+  });
 
-    const chats = {
-      julia: {
-        nome: "Julia",
-        status: "Online agora",
-        avatar: "julia.jpg",
-        sugestao: "Vocês dois gostam de livros e fé. Que tal perguntar sobre um livro marcante?",
-        mensagens: [
-          { tipo: "recebida", texto: "Oi, Vitor! Tudo bem?" },
-          { tipo: "enviada", texto: "Tudo ótimo! E você?" },
-          { tipo: "recebida", texto: "Melhor agora 😄" }
-        ]
-      },
+  const chats = {
+    julia: {
+      nome: "Julia",
+      foto: "julia.jpg",
+      status: "Online",
+      mensagens: [
+        { tipo: "recebida", texto: "Oi, Vitor! Tudo bem?" },
+        { tipo: "enviada", texto: "Tudo ótimo! E você?" },
+        { tipo: "recebida", texto: "Melhor agora 😄" }
+      ]
+    },
 
-      ana: {
-        nome: "Ana",
-        status: "Viu seu perfil recentemente",
-        inicial: "A",
-        sugestao: "Vocês dois gostam de café. Uma conversa leve pode começar por aí.",
-        mensagens: [
-          { tipo: "recebida", texto: "Oi, Vitor! Vi que gostamos de café ☕" },
-          { tipo: "enviada", texto: "Sim! Café já é praticamente parte da minha rotina 😅" },
-          { tipo: "recebida", texto: "Então já temos um ótimo começo." }
-        ]
-      },
+    amanda: {
+      nome: "Amanda",
+      foto: "amanda.jpg",
+      status: "Online",
+      mensagens: [
+        { tipo: "recebida", texto: "Oi, Vitor! Vi que também gosta de música." },
+        { tipo: "enviada", texto: "Gosto bastante! Que tipo você mais ouve?" },
+        { tipo: "recebida", texto: "Ultimamente tenho ouvido muita MPB e indie." }
+      ]
+    },
 
-      marina: {
-        nome: "Marina",
-        status: "Online",
-        inicial: "M",
-        sugestao: "Vocês dois gostam de viagens. Pergunte sobre um lugar que marcou a vida dele.",
-        mensagens: [
-          { tipo: "recebida", texto: "Oi, lindo! Curte viagens?" },
-          { tipo: "enviada", texto: "Demais! Já fui pra 5 países." }
-        ]
-      }
-    };
+    marina: {
+      nome: "Marina",
+      foto: "marina.jpg",
+      status: "Online agora",
+      mensagens: [
+        { tipo: "recebida", texto: "Oi! Achei legal que você também valoriza família." },
+        { tipo: "enviada", texto: "Sim, isso é bem importante pra mim." },
+        { tipo: "recebida", texto: "Pra mim também. Acho que diz muito sobre a pessoa." }
+      ]
+    },
 
-    const conversaItems = document.querySelectorAll(".conversa-item");
-    const chatConteudo = document.getElementById("chat-conteudo");
-    const chatNome = document.getElementById("chat-nome");
-    const chatStatus = document.getElementById("chat-status");
-    const chatAvatar = document.getElementById("chat-avatar");
-    const sugestaoTexto = document.querySelector(".sugestao-chat p");
-    const formChat = document.getElementById("form-chat");
-    const mensagemInput = document.getElementById("mensagem-input");
-
-    let chatAtual = "julia";
-
-    function carregarChat(chatId) {
-      const chat = chats[chatId];
-
-      chatAtual = chatId;
-      chatNome.textContent = chat.nome;
-      chatStatus.textContent = chat.status;
-      sugestaoTexto.textContent = chat.sugestao;
-
-      if (chat.avatar) {
-        chatAvatar.innerHTML = `<img src="${chat.avatar}" alt="Foto de ${chat.nome}">`;
-      } else {
-        chatAvatar.innerHTML = `<span>${chat.inicial}</span>`;
-      }
-
-      chatConteudo.innerHTML = "";
-
-      chat.mensagens.forEach(msg => {
-        const div = document.createElement("div");
-        div.classList.add("mensagem", msg.tipo);
-        div.textContent = msg.texto;
-        chatConteudo.appendChild(div);
-      });
-
-      chatConteudo.scrollTop = chatConteudo.scrollHeight;
+    larissa: {
+      nome: "Larissa",
+      foto: "larissa.jpg",
+      status: "Visto recentemente",
+      mensagens: [
+        { tipo: "recebida", texto: "Oi! Vi que você gosta de tecnologia também." },
+        { tipo: "enviada", texto: "Sim! Curto bastante essa área." }
+      ]
     }
+  };
+
+  const conversaItems = document.querySelectorAll(".conversa-item");
+  const chatConteudo = document.getElementById("chat-conteudo");
+  const chatNome = document.getElementById("chat-nome");
+  const chatStatus = document.getElementById("chat-status");
+  const fotoChat = document.querySelector(".cabecalho-chat img");
+
+  function abrirChat(chatId) {
+    const chat = chats[chatId];
+
+    if (!chat) return;
 
     conversaItems.forEach(item => {
-      item.addEventListener("click", () => {
-        conversaItems.forEach(i => i.classList.remove("ativo"));
+      item.classList.remove("ativo");
+
+      if (item.dataset.chat === chatId) {
         item.classList.add("ativo");
-
-        carregarChat(item.dataset.chat);
-      });
+      }
     });
 
-    formChat.addEventListener("submit", event => {
-      event.preventDefault();
+    chatNome.textContent = chat.nome;
+    chatStatus.textContent = chat.status;
+    fotoChat.src = chat.foto;
+    fotoChat.alt = chat.nome;
 
-      const texto = mensagemInput.value.trim();
+    chatConteudo.innerHTML = "";
 
-      if (!texto) return;
-
-      chats[chatAtual].mensagens.push({
-        tipo: "enviada",
-        texto: texto
-      });
-
-      mensagemInput.value = "";
-      carregarChat(chatAtual);
+    chat.mensagens.forEach(msg => {
+      const div = document.createElement("div");
+      div.classList.add("mensagem", msg.tipo);
+      div.textContent = msg.texto;
+      chatConteudo.appendChild(div);
     });
-  </script>
+  }
+
+  conversaItems.forEach(item => {
+    item.addEventListener("click", () => {
+      abrirChat(item.dataset.chat);
+    });
+  });
+
+  const parametros = new URLSearchParams(window.location.search);
+  const chatInicial = parametros.get("chat") || "julia";
+
+  abrirChat(chatInicial);
+
+  const formChat = document.getElementById("form-chat");
+  const inputMensagem = formChat.querySelector("input");
+
+  formChat.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const texto = inputMensagem.value.trim();
+
+    if (texto === "") return;
+
+    const div = document.createElement("div");
+    div.classList.add("mensagem", "enviada");
+    div.textContent = texto;
+
+    chatConteudo.appendChild(div);
+    inputMensagem.value = "";
+    chatConteudo.scrollTop = chatConteudo.scrollHeight;
+  });
+</script>
 
 </body>
 </html>
