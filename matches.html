@@ -179,20 +179,6 @@
       font-family: Arial, sans-serif;
     }
 
-    .btn-remover {
-      padding: 14px 16px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.08);
-      color: #ffffff;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .btn-remover:hover {
-      background: rgba(220,38,38,0.45);
-    }
-
     .sem-matches {
       display: none;
       padding: 36px;
@@ -397,47 +383,62 @@
   </div>
 
   <script>
-    const toggle = document.getElementById("toggle");
-    const sidebar = document.getElementById("sidebar");
+    (() => {
+      const toggle = document.getElementById("toggle");
+      const sidebar = document.getElementById("sidebar");
 
-    toggle.addEventListener("click", () => {
-      sidebar.classList.toggle("collapsed");
-    });
-
-    const buscarMatch = document.getElementById("buscarMatch");
-    const cards = document.querySelectorAll(".match-card");
-    const totalMatches = document.getElementById("totalMatches");
-    const semMatches = document.getElementById("semMatches");
-
-    function atualizarMatches() {
-      const termo = buscarMatch.value.toLowerCase().trim();
-      let totalVisivel = 0;
-
-      cards.forEach(card => {
-        const texto = card.dataset.busca.toLowerCase();
-
-        if (texto.includes(termo)) {
-          card.classList.remove("esconder");
-          totalVisivel++;
-        } else {
-          card.classList.add("esconder");
-        }
-      });
-
-      totalMatches.textContent = totalVisivel;
-
-      if (totalVisivel === 0) {
-        semMatches.classList.add("mostrar");
-      } else {
-        semMatches.classList.remove("mostrar");
+      if (toggle && sidebar) {
+        toggle.addEventListener("click", () => {
+          sidebar.classList.toggle("collapsed");
+        });
       }
-    }
 
-    buscarMatch.addEventListener("input", atualizarMatches);
+      const dadosSalvos = localStorage.getItem("usuarioRealConnection");
 
-    atualizarMatches();
+      if (dadosSalvos) {
+        const usuario = JSON.parse(dadosSalvos);
+        const primeiroNome = usuario.nome ? usuario.nome.split(" ")[0] : "Usuário";
+        const nomesMenu = document.querySelectorAll(".sidebar .name, .menu-lateral .nome");
+
+        nomesMenu.forEach(nome => {
+          nome.textContent = primeiroNome;
+        });
+      }
+
+      const buscarMatch = document.getElementById("buscarMatch");
+      const cards = document.querySelectorAll(".match-card");
+      const totalMatches = document.getElementById("totalMatches");
+      const semMatches = document.getElementById("semMatches");
+
+      function atualizarMatches() {
+        const termo = buscarMatch.value.toLowerCase().trim();
+        let totalVisivel = 0;
+
+        cards.forEach(card => {
+          const texto = card.dataset.busca.toLowerCase();
+
+          if (texto.includes(termo)) {
+            card.classList.remove("esconder");
+            totalVisivel++;
+          } else {
+            card.classList.add("esconder");
+          }
+        });
+
+        totalMatches.textContent = totalVisivel;
+
+        if (totalVisivel === 0) {
+          semMatches.classList.add("mostrar");
+        } else {
+          semMatches.classList.remove("mostrar");
+        }
+      }
+
+      buscarMatch.addEventListener("input", atualizarMatches);
+
+      atualizarMatches();
+    })();
   </script>
-  <script src="script.js"></script>
-
+<script src="script.js"></script>
 </body>
 </html>

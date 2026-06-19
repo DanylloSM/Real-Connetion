@@ -22,7 +22,7 @@
 
       <a href="perfil.html" class="profile">
         <div class="avatar"></div>
-        <span class="name" id="menu-nome-usuario">Usuário</span>
+        <span class="name">Vitor</span>
       </a>
 
       <nav>
@@ -215,79 +215,94 @@
   </div>
 
   <script>
-    const toggle = document.getElementById("toggle");
-    const sidebar = document.getElementById("sidebar");
+    (() => {
+      const toggle = document.getElementById("toggle");
+      const sidebar = document.getElementById("sidebar");
 
-    toggle.addEventListener("click", () => {
-      sidebar.classList.toggle("collapsed");
-    });
-
-    const buscarPessoa = document.getElementById("buscarPessoa");
-    const listaPessoas = document.getElementById("listaPessoas");
-    const cards = Array.from(document.querySelectorAll(".explorar-card"));
-    const filtros = document.querySelectorAll(".filtro");
-
-    let filtroAtual = "todos";
-
-    function aplicarFiltros() {
-      const termo = buscarPessoa.value.toLowerCase().trim();
-
-      cards.forEach(card => {
-        const texto = card.dataset.busca.toLowerCase();
-        const local = card.dataset.local;
-        const objetivo = card.dataset.objetivo;
-
-        let aparece = texto.includes(termo);
-
-        if (filtroAtual === "perto") {
-          aparece = aparece && local === "rj";
-        }
-
-        if (filtroAtual === "serio") {
-          aparece = aparece && objetivo === "serio";
-        }
-
-        if (aparece) {
-          card.classList.remove("esconder");
-        } else {
-          card.classList.add("esconder");
-        }
-      });
-
-      if (filtroAtual === "todos") {
-        ordenarPor("compatibilidade");
+      if (toggle && sidebar) {
+        toggle.addEventListener("click", () => {
+          sidebar.classList.toggle("collapsed");
+        });
       }
 
-      if (filtroAtual === "interesses") {
-        ordenarPor("interesses");
+      const dadosSalvos = localStorage.getItem("usuarioRealConnection");
+
+      if (dadosSalvos) {
+        const usuario = JSON.parse(dadosSalvos);
+        const primeiroNome = usuario.nome ? usuario.nome.split(" ")[0] : "Usuário";
+        const nomesMenu = document.querySelectorAll(".sidebar .name, .menu-lateral .nome");
+
+        nomesMenu.forEach(nome => {
+          nome.textContent = primeiroNome;
+        });
       }
-    }
 
-    function ordenarPor(tipo) {
-      const cardsOrdenados = [...cards].sort((a, b) => {
-        return Number(b.dataset[tipo]) - Number(a.dataset[tipo]);
+      const buscarPessoa = document.getElementById("buscarPessoa");
+      const listaPessoas = document.getElementById("listaPessoas");
+      const cards = Array.from(document.querySelectorAll(".explorar-card"));
+      const filtros = document.querySelectorAll(".filtro");
+
+      let filtroAtual = "todos";
+
+      function aplicarFiltros() {
+        const termo = buscarPessoa.value.toLowerCase().trim();
+
+        cards.forEach(card => {
+          const texto = card.dataset.busca.toLowerCase();
+          const local = card.dataset.local;
+          const objetivo = card.dataset.objetivo;
+
+          let aparece = texto.includes(termo);
+
+          if (filtroAtual === "perto") {
+            aparece = aparece && local === "rj";
+          }
+
+          if (filtroAtual === "serio") {
+            aparece = aparece && objetivo === "serio";
+          }
+
+          if (aparece) {
+            card.classList.remove("esconder");
+          } else {
+            card.classList.add("esconder");
+          }
+        });
+
+        if (filtroAtual === "todos") {
+          ordenarPor("compatibilidade");
+        }
+
+        if (filtroAtual === "interesses") {
+          ordenarPor("interesses");
+        }
+      }
+
+      function ordenarPor(tipo) {
+        const cardsOrdenados = [...cards].sort((a, b) => {
+          return Number(b.dataset[tipo]) - Number(a.dataset[tipo]);
+        });
+
+        cardsOrdenados.forEach(card => {
+          listaPessoas.appendChild(card);
+        });
+      }
+
+      buscarPessoa.addEventListener("input", aplicarFiltros);
+
+      filtros.forEach(botao => {
+        botao.addEventListener("click", () => {
+          filtros.forEach(item => item.classList.remove("ativo"));
+          botao.classList.add("ativo");
+
+          filtroAtual = botao.dataset.filtro;
+          aplicarFiltros();
+        });
       });
 
-      cardsOrdenados.forEach(card => {
-        listaPessoas.appendChild(card);
-      });
-    }
-
-    buscarPessoa.addEventListener("input", aplicarFiltros);
-
-    filtros.forEach(botao => {
-      botao.addEventListener("click", () => {
-        filtros.forEach(item => item.classList.remove("ativo"));
-        botao.classList.add("ativo");
-
-        filtroAtual = botao.dataset.filtro;
-        aplicarFiltros();
-      });
-    });
-
-    aplicarFiltros();
+      aplicarFiltros();
+    })();
   </script>
-  <script src="script.js"></script>
-
+<script src="script.js"></script>
 </body>
 </html>
