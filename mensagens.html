@@ -145,6 +145,16 @@
       sidebar.classList.toggle("collapsed");
     });
 
+     const dadosSalvos = localStorage.getItem("usuarioRealConnection");
+    let primeiroNome = "Usuário"; 
+
+    if (dadosSalvos) {
+      const usuarioObj = JSON.parse(dadosSalvos);
+     if (usuarioObj.nome) {
+        primeiroNome = usuarioObj.nome.split(" ")[0];
+      }
+    }
+
     const chats = {
       julia: {
         nome: "Julia",
@@ -152,7 +162,7 @@
         status: "Online agora",
         sugestao: "Vocês dois gostam de livros e fé. Que tal perguntar sobre um livro marcante?",
         mensagens: [
-          { tipo: "recebida", texto: "Oi, Vitor! Tudo bem?" },
+          { tipo: "recebida", texto: `Oi, ${primeiroNome}! Tudo bem?` },
           { tipo: "enviada", texto: "Tudo ótimo! E você?" },
           { tipo: "recebida", texto: "Melhor agora 😄" }
         ]
@@ -164,7 +174,7 @@
         status: "Online agora",
         sugestao: "Vocês dois gostam de música e viagens. Que tal perguntar qual foi a melhor viagem dela?",
         mensagens: [
-          { tipo: "recebida", texto: "Oi, Vitor! Vi que também gosta de música." },
+          { tipo: "recebida", texto: `Oi,${primeiroNome}! Vi que também gosta de música.` },
           { tipo: "enviada", texto: "Gosto bastante! Que tipo você mais ouve?" },
           { tipo: "recebida", texto: "Ultimamente tenho ouvido muita MPB e indie." }
         ]
