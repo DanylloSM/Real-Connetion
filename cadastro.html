@@ -126,18 +126,8 @@
     </section>
 
   </main>
-<script>
-  const formCadastro = document.querySelector("form");
-  const senha = document.getElementById("senha");
-  const confirmarSenha = document.getElementById("confirmar-senha");
 
-  formCadastro.addEventListener("submit", (event) => {
-    if (senha.value !== confirmarSenha.value) {
-      event.preventDefault();
-      alert("As senhas precisam ser iguais.");
-      confirmarSenha.focus();
-    }
-  });
-</script>
+  <!--PASSEI O SCRIPT Q TAVA AQUI PRO ARQUIVO SCRIPT.JS PRA FICAR TUDO NUM LIGAR SÓ-->
+ <script src="script.js"></script>
 </body>
 </html>

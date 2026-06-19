@@ -22,12 +22,12 @@
 
       <a href="perfil.html" class="profile">
         <div class="avatar"></div>
-        <span class="name">Vitor</span>
+        <span class="name" id="menu-nome-usuario">Usuário</span>
       </a>
 
       <nav>
         <a href="explorar.html" class="ativo"><span>🔍</span><p>Explorar</p></a>
-        <a href="lobby.html"><span>❤️</span><p>Matches</p></a>
+        <a href="matches.html"><span>❤️</span><p>Matches</p></a>
         <a href="mensagens.html"><span>💬</span><p>Mensagens</p></a>
         <a href="perfil.html"><span>👤</span><p>Meu perfil</p></a>
         <a href="editperfil.html"><span>⚙️</span><p>Editar perfil</p></a>
@@ -58,15 +58,22 @@
       </section>
 
       <section class="filtros-explorar">
-        <button type="button" class="filtro ativo">Mais compatíveis</button>
-        <button type="button" class="filtro">Perto de você</button>
-        <button type="button" class="filtro">Interesses em comum</button>
-        <button type="button" class="filtro">Relacionamento sério</button>
+        <button type="button" class="filtro ativo" data-filtro="todos">Mais compatíveis</button>
+        <button type="button" class="filtro" data-filtro="perto">Perto de você</button>
+        <button type="button" class="filtro" data-filtro="interesses">Interesses em comum</button>
+        <button type="button" class="filtro" data-filtro="serio">Relacionamento sério</button>
       </section>
 
       <section class="cards-explorar" id="listaPessoas">
 
-        <article class="explorar-card" data-busca="julia livros café fé são paulo relacionamento sério">
+        <article
+          class="explorar-card"
+          data-busca="julia livros café fé são paulo relacionamento sério"
+          data-compatibilidade="86"
+          data-local="sp"
+          data-interesses="3"
+          data-objetivo="serio"
+        >
           <div class="foto-card">
             <img src="julia.jpg" alt="Foto de Julia">
             <span class="compatibilidade-card">86%</span>
@@ -92,13 +99,20 @@
               <span>Fé</span>
             </div>
 
-            <a href="lobby.html" class="btn-primary full">Ver match</a>
+            <a href="lobby.html?pessoa=julia" class="btn-primary full">Ver match</a>
           </div>
         </article>
 
-        <article class="explorar-card" data-busca="amanda música viagens rio de janeiro conexão">
-          <div class="foto-card placeholder-card">
-            <span>A</span>
+        <article
+          class="explorar-card"
+          data-busca="amanda música viagens rio de janeiro conexão"
+          data-compatibilidade="78"
+          data-local="rj"
+          data-interesses="2"
+          data-objetivo="conexao"
+        >
+          <div class="foto-card">
+            <img src="amanda.jpg" alt="Foto de Amanda">
             <span class="compatibilidade-card">78%</span>
           </div>
 
@@ -120,13 +134,20 @@
               <span>Respeito</span>
             </div>
 
-            <a href="lobby.html" class="btn-secondary full">Ver perfil</a>
+            <a href="lobby.html?pessoa=amanda" class="btn-secondary full">Ver perfil</a>
           </div>
         </article>
 
-        <article class="explorar-card" data-busca="larissa arte filmes tecnologia niterói">
-          <div class="foto-card placeholder-card">
-            <span>L</span>
+        <article
+          class="explorar-card"
+          data-busca="larissa arte filmes tecnologia niterói"
+          data-compatibilidade="74"
+          data-local="rj"
+          data-interesses="1"
+          data-objetivo="conexao"
+        >
+          <div class="foto-card">
+            <img src="larissa.jpg" alt="Foto de Larissa">
             <span class="compatibilidade-card">74%</span>
           </div>
 
@@ -148,13 +169,20 @@
               <span>Tecnologia</span>
             </div>
 
-            <a href="lobby.html" class="btn-secondary full">Ver perfil</a>
+            <a href="lobby.html?pessoa=larissa" class="btn-secondary full">Ver perfil</a>
           </div>
         </article>
 
-        <article class="explorar-card" data-busca="marina academia pets estabilidade família">
-          <div class="foto-card placeholder-card">
-            <span>M</span>
+        <article
+          class="explorar-card"
+          data-busca="marina academia pets estabilidade família relacionamento sério"
+          data-compatibilidade="71"
+          data-local="rj"
+          data-interesses="2"
+          data-objetivo="serio"
+        >
+          <div class="foto-card">
+            <img src="marina.jpg" alt="Foto de Marina">
             <span class="compatibilidade-card">71%</span>
           </div>
 
@@ -176,7 +204,7 @@
               <span>Família</span>
             </div>
 
-            <a href="lobby.html" class="btn-secondary full">Ver perfil</a>
+            <a href="lobby.html?pessoa=marina" class="btn-secondary full">Ver perfil</a>
           </div>
         </article>
 
@@ -195,22 +223,71 @@
     });
 
     const buscarPessoa = document.getElementById("buscarPessoa");
-    const cards = document.querySelectorAll(".explorar-card");
+    const listaPessoas = document.getElementById("listaPessoas");
+    const cards = Array.from(document.querySelectorAll(".explorar-card"));
+    const filtros = document.querySelectorAll(".filtro");
 
-    buscarPessoa.addEventListener("input", () => {
+    let filtroAtual = "todos";
+
+    function aplicarFiltros() {
       const termo = buscarPessoa.value.toLowerCase().trim();
 
       cards.forEach(card => {
         const texto = card.dataset.busca.toLowerCase();
+        const local = card.dataset.local;
+        const objetivo = card.dataset.objetivo;
 
-        if (texto.includes(termo)) {
+        let aparece = texto.includes(termo);
+
+        if (filtroAtual === "perto") {
+          aparece = aparece && local === "rj";
+        }
+
+        if (filtroAtual === "serio") {
+          aparece = aparece && objetivo === "serio";
+        }
+
+        if (aparece) {
           card.classList.remove("esconder");
         } else {
           card.classList.add("esconder");
         }
       });
+
+      if (filtroAtual === "todos") {
+        ordenarPor("compatibilidade");
+      }
+
+      if (filtroAtual === "interesses") {
+        ordenarPor("interesses");
+      }
+    }
+
+    function ordenarPor(tipo) {
+      const cardsOrdenados = [...cards].sort((a, b) => {
+        return Number(b.dataset[tipo]) - Number(a.dataset[tipo]);
+      });
+
+      cardsOrdenados.forEach(card => {
+        listaPessoas.appendChild(card);
+      });
+    }
+
+    buscarPessoa.addEventListener("input", aplicarFiltros);
+
+    filtros.forEach(botao => {
+      botao.addEventListener("click", () => {
+        filtros.forEach(item => item.classList.remove("ativo"));
+        botao.classList.add("ativo");
+
+        filtroAtual = botao.dataset.filtro;
+        aplicarFiltros();
+      });
     });
+
+    aplicarFiltros();
   </script>
+  <script src="script.js"></script>
 
 </body>
 </html>

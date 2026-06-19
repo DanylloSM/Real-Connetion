@@ -27,7 +27,7 @@
 
       <nav>
         <a href="explorar.html"><span>🔍</span><p>Explorar</p></a>
-        <a href="lobby.html"><span>❤️</span><p>Matches</p></a>
+        <a href="matches.html"><span>❤️</span><p>Matches</p></a>
         <a href="mensagens.html" class="ativo"><span>💬</span><p>Mensagens</p></a>
         <a href="perfil.html"><span>👤</span><p>Meu perfil</p></a>
         <a href="editperfil.html"><span>⚙️</span><p>Editar perfil</p></a>
@@ -35,96 +35,101 @@
 
     </aside>
 
-    <!-- PÁGINA DE MENSAGENS -->
+    <!-- CONTEÚDO -->
     <main class="mensagens-page">
 
-      <section class="mensagens-layout">
+      <!-- LISTA DE CONVERSAS -->
+      <section class="painel-conversas">
 
-        <!-- LISTA DE CONVERSAS -->
-        <aside class="conversas-card">
+        <span class="mensagens-label">Conversas</span>
 
-          <div class="mensagens-topo">
-            <span class="mensagens-label">Conversas</span>
-            <h1>Mensagens</h1>
-            <p>Continue conversas com pessoas que combinaram com você.</p>
-          </div>
+        <h1>Mensagens</h1>
 
-          <div class="lista-conversas">
+        <p class="mensagens-subtitulo">
+          Continue conversas com pessoas que combinaram com você.
+        </p>
 
-            <button class="conversa-item ativo" type="button" data-chat="julia">
-              <img src="julia.jpg" alt="Foto de Julia" class="conversa-foto">
+        <div class="lista-conversas">
 
-              <div class="conversa-texto">
-                <strong>Julia</strong>
-                <p>Você: Que tal um café amanhã?</p>
-              </div>
+          <article class="conversa-item ativo" data-chat="julia">
+            <img src="julia.jpg" alt="Julia" class="avatar-conversa">
 
-              <span class="hora">10:45</span>
-            </button>
-
-            <button class="conversa-item" type="button" data-chat="ana">
-              <div class="conversa-inicial">A</div>
-
-              <div class="conversa-texto">
-                <strong>Ana</strong>
-                <p>Ana: Adorei seu perfil 💜</p>
-              </div>
-
-              <span class="hora">Ontem</span>
-            </button>
-
-            <button class="conversa-item" type="button" data-chat="marina">
-              <div class="conversa-inicial">M</div>
-
-              <div class="conversa-texto">
-                <strong>Marina</strong>
-                <p>Marina: Vamos conversar?</p>
-              </div>
-
-              <span class="hora">Seg</span>
-            </button>
-
-          </div>
-
-        </aside>
-
-        <!-- CHAT ATIVO -->
-        <section class="chat-card">
-
-          <header class="cabecalho-chat">
-
-            <div class="chat-pessoa">
-              <div class="chat-avatar" id="chat-avatar">
-                <img src="julia.jpg" alt="Foto de Julia">
-              </div>
-
-              <div>
-                <h2 id="chat-nome">Julia</h2>
-                <span id="chat-status">Online agora</span>
-              </div>
+            <div class="info-contato">
+              <strong>Julia</strong>
+              <p>Você: Que tal um café amanhã?</p>
             </div>
 
-            <a href="lobby.html" class="btn-secondary">Ver match</a>
+            <span class="hora">10:45</span>
+          </article>
 
-          </header>
+          <article class="conversa-item" data-chat="amanda">
+            <img src="amanda.jpg" alt="Amanda" class="avatar-conversa">
 
-          <div class="sugestao-chat">
-            <span>✨ Sugestão de conversa:</span>
-            <p>Vocês dois gostam de livros e fé. Que tal perguntar sobre um livro marcante?</p>
+            <div class="info-contato">
+              <strong>Amanda</strong>
+              <p>Amanda: Vi que também gosta de música.</p>
+            </div>
+
+            <span class="hora">Ontem</span>
+          </article>
+
+          <article class="conversa-item" data-chat="marina">
+            <img src="marina.jpg" alt="Marina" class="avatar-conversa">
+
+            <div class="info-contato">
+              <strong>Marina</strong>
+              <p>Marina: Também valorizo família.</p>
+            </div>
+
+            <span class="hora">Seg</span>
+          </article>
+
+          <article class="conversa-item" data-chat="larissa">
+            <img src="larissa.jpg" alt="Larissa" class="avatar-conversa">
+
+            <div class="info-contato">
+              <strong>Larissa</strong>
+              <p>Larissa: Você gosta de tecnologia?</p>
+            </div>
+
+            <span class="hora">Sex</span>
+          </article>
+
+        </div>
+
+      </section>
+
+      <!-- CHAT ABERTO -->
+      <section class="painel-chat">
+
+        <header class="cabecalho-chat">
+
+          <div class="dados-chat">
+            <img src="julia.jpg" alt="Julia" class="avatar-chat" id="fotoChat">
+
+            <div>
+              <h2 id="chatNome">Julia</h2>
+              <span id="chatStatus">Online agora</span>
+            </div>
           </div>
 
-          <div class="mensagens-chat" id="chat-conteudo">
-            <div class="mensagem recebida">Oi, Vitor! Tudo bem?</div>
-            <div class="mensagem enviada">Tudo ótimo! E você?</div>
-            <div class="mensagem recebida">Melhor agora 😄</div>
-          </div>
+          <a href="lobby.html?pessoa=julia" class="btn-secondary" id="linkMatch">
+            Ver match
+          </a>
 
-          <form class="input-chat" id="form-chat">
-            <input id="mensagem-input" type="text" placeholder="Digite uma mensagem..." required>
-            <button type="submit">Enviar</button>
-          </form>
+        </header>
 
-        </section>
+        <div class="sugestao-chat" id="sugestaoChat">
+          <strong>✨ Sugestão de conversa:</strong>
+          <p>Vocês dois gostam de livros e fé. Que tal perguntar sobre um livro marcante?</p>
+        </div>
+
+        <div class="mensagens-chat" id="chatConteudo"></div>
+
+        <form class="input-chat" id="formChat">
+          <input type="text" id="inputMensagem" placeholder="Digite uma mensagem..." required>
+          <button type="submit" class="btn-primary">Enviar</button>
+        </form>
 
       </section>
 
@@ -143,8 +148,8 @@
     const chats = {
       julia: {
         nome: "Julia",
+        foto: "julia.jpg",
         status: "Online agora",
-        avatar: "julia.jpg",
         sugestao: "Vocês dois gostam de livros e fé. Que tal perguntar sobre um livro marcante?",
         mensagens: [
           { tipo: "recebida", texto: "Oi, Vitor! Tudo bem?" },
@@ -153,92 +158,125 @@
         ]
       },
 
-      ana: {
-        nome: "Ana",
-        status: "Viu seu perfil recentemente",
-        inicial: "A",
-        sugestao: "Vocês dois gostam de café. Uma conversa leve pode começar por aí.",
+      amanda: {
+        nome: "Amanda",
+        foto: "amanda.jpg",
+        status: "Online agora",
+        sugestao: "Vocês dois gostam de música e viagens. Que tal perguntar qual foi a melhor viagem dela?",
         mensagens: [
-          { tipo: "recebida", texto: "Oi, Vitor! Vi que gostamos de café ☕" },
-          { tipo: "enviada", texto: "Sim! Café já é praticamente parte da minha rotina 😅" },
-          { tipo: "recebida", texto: "Então já temos um ótimo começo." }
+          { tipo: "recebida", texto: "Oi, Vitor! Vi que também gosta de música." },
+          { tipo: "enviada", texto: "Gosto bastante! Que tipo você mais ouve?" },
+          { tipo: "recebida", texto: "Ultimamente tenho ouvido muita MPB e indie." }
         ]
       },
 
       marina: {
         nome: "Marina",
-        status: "Online",
-        inicial: "M",
-        sugestao: "Vocês dois gostam de viagens. Pergunte sobre um lugar que marcou a vida dele.",
+        foto: "marina.jpg",
+        status: "Online agora",
+        sugestao: "Vocês dois valorizam família e estabilidade. Que tal falar sobre rotina e planos de vida?",
         mensagens: [
-          { tipo: "recebida", texto: "Oi, lindo! Curte viagens?" },
-          { tipo: "enviada", texto: "Demais! Já fui pra 5 países." }
+          { tipo: "recebida", texto: "Oi! Achei legal que você também valoriza família." },
+          { tipo: "enviada", texto: "Sim, isso é bem importante pra mim." },
+          { tipo: "recebida", texto: "Pra mim também. Acho que diz muito sobre a pessoa." }
+        ]
+      },
+
+      larissa: {
+        nome: "Larissa",
+        foto: "larissa.jpg",
+        status: "Visto recentemente",
+        sugestao: "Vocês dois gostam de tecnologia. Que tal perguntar qual área mais chama atenção dela?",
+        mensagens: [
+          { tipo: "recebida", texto: "Oi! Vi que você gosta de tecnologia também." },
+          { tipo: "enviada", texto: "Sim! Curto bastante essa área." },
+          { tipo: "recebida", texto: "Eu também. Acho essa área cheia de possibilidades." }
         ]
       }
     };
 
     const conversaItems = document.querySelectorAll(".conversa-item");
-    const chatConteudo = document.getElementById("chat-conteudo");
-    const chatNome = document.getElementById("chat-nome");
-    const chatStatus = document.getElementById("chat-status");
-    const chatAvatar = document.getElementById("chat-avatar");
-    const sugestaoTexto = document.querySelector(".sugestao-chat p");
-    const formChat = document.getElementById("form-chat");
-    const mensagemInput = document.getElementById("mensagem-input");
+    const chatConteudo = document.getElementById("chatConteudo");
+    const chatNome = document.getElementById("chatNome");
+    const chatStatus = document.getElementById("chatStatus");
+    const fotoChat = document.getElementById("fotoChat");
+    const sugestaoChat = document.getElementById("sugestaoChat");
+    const linkMatch = document.getElementById("linkMatch");
+    const formChat = document.getElementById("formChat");
+    const inputMensagem = document.getElementById("inputMensagem");
 
     let chatAtual = "julia";
 
-    function carregarChat(chatId) {
-      const chat = chats[chatId];
+    function abrirChat(chatId) {
+      const chat = chats[chatId] || chats.julia;
 
-      chatAtual = chatId;
+      chatAtual = chats[chatId] ? chatId : "julia";
+
+      conversaItems.forEach(item => {
+        item.classList.toggle("ativo", item.dataset.chat === chatAtual);
+      });
+
       chatNome.textContent = chat.nome;
       chatStatus.textContent = chat.status;
-      sugestaoTexto.textContent = chat.sugestao;
+      fotoChat.src = chat.foto;
+      fotoChat.alt = chat.nome;
+      linkMatch.href = `lobby.html?pessoa=${chatAtual}`;
 
-      if (chat.avatar) {
-        chatAvatar.innerHTML = `<img src="${chat.avatar}" alt="Foto de ${chat.nome}">`;
-      } else {
-        chatAvatar.innerHTML = `<span>${chat.inicial}</span>`;
-      }
+      sugestaoChat.innerHTML = `
+        <strong>✨ Sugestão de conversa:</strong>
+        <p>${chat.sugestao}</p>
+      `;
 
       chatConteudo.innerHTML = "";
 
-      chat.mensagens.forEach(msg => {
+      chat.mensagens.forEach(mensagem => {
         const div = document.createElement("div");
-        div.classList.add("mensagem", msg.tipo);
-        div.textContent = msg.texto;
+        div.classList.add("mensagem", mensagem.tipo);
+        div.textContent = mensagem.texto;
         chatConteudo.appendChild(div);
       });
 
       chatConteudo.scrollTop = chatConteudo.scrollHeight;
+
+      const novaUrl = `mensagens.html?chat=${chatAtual}`;
+      window.history.replaceState(null, "", novaUrl);
     }
 
     conversaItems.forEach(item => {
       item.addEventListener("click", () => {
-        conversaItems.forEach(i => i.classList.remove("ativo"));
-        item.classList.add("ativo");
-
-        carregarChat(item.dataset.chat);
+        abrirChat(item.dataset.chat);
       });
     });
 
-    formChat.addEventListener("submit", event => {
+    formChat.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      const texto = mensagemInput.value.trim();
+      const texto = inputMensagem.value.trim();
 
-      if (!texto) return;
+      if (texto === "") return;
 
-      chats[chatAtual].mensagens.push({
+      const novaMensagem = {
         tipo: "enviada",
         texto: texto
-      });
+      };
 
-      mensagemInput.value = "";
-      carregarChat(chatAtual);
+      chats[chatAtual].mensagens.push(novaMensagem);
+
+      const div = document.createElement("div");
+      div.classList.add("mensagem", "enviada");
+      div.textContent = texto;
+
+      chatConteudo.appendChild(div);
+      inputMensagem.value = "";
+      chatConteudo.scrollTop = chatConteudo.scrollHeight;
     });
+
+    const parametros = new URLSearchParams(window.location.search);
+    const chatInicial = parametros.get("chat") || "julia";
+
+    abrirChat(chatInicial);
   </script>
+  <script src="script.js"></script>
 
 </body>
 </html>
